@@ -49,7 +49,6 @@ history.db
 history.db-*
 settings.json
 logs/
-CryptoVault/
 
 # Releases geradas
 release/
