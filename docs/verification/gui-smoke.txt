@@ -1,0 +1,38 @@
+# Smoke test da GUI empacotada
+
+Executado em 2026-11-03 com `dist/CryptoVault.exe` e diretório de dados isolado.
+
+Comando (PowerShell):
+
+```powershell
+$dir = Join-Path $env:TEMP ('cryptovault-smoke-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Force $dir | Out-Null
+$p = Start-Process -FilePath (Resolve-Path 'dist\CryptoVault.exe') `
+  -ArgumentList @('--data-dir', $dir) -PassThru
+Start-Sleep -Seconds 8
+$alive = -not $p.HasExited
+```
+
+Resultado:
+
+```text
+pid=18212 alive_after_8s=True
+data_dir=C:\Users\marlo\AppData\Local\Temp\cryptovault-smoke-ae043f8eefc949d58bcee87e4dfc30ee
+
+Arquivos criados:
+  cryptovault.lock      62 bytes
+  history.db        24.576 bytes
+  settings.json        376 bytes
+  logs\cryptovault.log 179 bytes
+```
+
+Conteúdo do log:
+
+```json
+{"timestamp":"2026-11-03T15:51:58.973428+00:00","level":"INFO","logger":"cryptovault","message":"logging_initialized","event":"logging_initialized","component":"infrastructure"}
+{"timestamp":"2026-11-03T15:51:58.973884+00:00","level":"INFO","logger":"cryptovault","message":"application_started","event":"application_started","version":"1.0.0"}
+```
+
+O processo foi encerrado após a verificação (`terminated=True`). Conclusão: o
+executável inicia a GUI, cria os artefatos locais esperados (lock, banco,
+configurações e log) e permanece em execução, sem falha de inicialização.

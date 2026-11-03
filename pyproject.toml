@@ -1,0 +1,115 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryptovault-desktop"
+version = "1.0.0"
+description = "Aplicativo desktop local para criptografia autenticada de arquivos"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "CryptoVault Contributors" }]
+keywords = ["security", "cryptography", "desktop", "pyside6", "aes-gcm"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Win32 (MS Windows)",
+  "Intended Audience :: End Users/Desktop",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security :: Cryptography",
+]
+dependencies = [
+  "PySide6>=6.9.3,<7",
+  "cryptography>=50.0.2,<51",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.0.3,<10",
+  "pytest-qt>=4.5,<5",
+  "pytest-cov>=7,<8",
+  "hypothesis>=6.120,<7",
+  "ruff>=0.9,<1",
+  "bandit>=1.8,<2",
+  "pip-audit>=2.8,<3",
+  "pyinstaller>=6.11,<7",
+]
+
+[project.scripts]
+cryptovault = "cryptovault.app:main"
+
+[project.urls]
+Documentation = "https://github.com/Mersfik/cryptovault-desktop#readme"
+Source = "https://github.com/Mersfik/cryptovault-desktop"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["cryptovault*"]
+
+[tool.setuptools.package-data]
+cryptovault = ["resources/*.svg", "resources/*.ico", "resources/*.png"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+qt_api = "pyside6"
+filterwarnings = [
+  "error",
+  "ignore::DeprecationWarning:shiboken6.*",
+]
+markers = [
+  "integration: integração entre camadas",
+  "security: testes de segurança",
+  "ui: testes de interface",
+  "slow: testes mais demorados",
+]
+
+[tool.coverage.run]
+source = ["cryptovault"]
+branch = true
+omit = ["cryptovault/app.py", "cryptovault/__main__.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_lines = [
+  "pragma: no cover",
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["."]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "SIM", "RUF", "ASYNC", "C4", "DTZ", "T20", "PT"]
+ignore = [
+  "S101",  # asserts são usados em testes e em invariantes internas
+  "S311",  # secrets é usado para material criptográfico; random não é usado
+  "RUF001", # textos em português contêm caracteres tipográficos
+  "RUF002",
+  "RUF003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S105", "S106", "S108", "PT011", "PT012", "SIM117", "B011"]
+"scripts/**" = ["T201", "S603", "S607", "S105"]  # senhas fixas são apenas demos de screenshots
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv", "build", "dist"]
+skips = ["B101"]
+
+[tool.pip-audit]
+format = "columns"

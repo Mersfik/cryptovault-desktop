@@ -1,0 +1,3 @@
+# Dependências de execução (versões mínimas seguras).
+PySide6>=6.9.3,<7
+cryptography>=50.0.2,<51

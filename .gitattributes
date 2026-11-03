@@ -1,0 +1,15 @@
+# Normaliza finais de linha no repositório (LF) e preserva binários.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.exe binary
+*.zip binary
+*.pdf binary
+
+# Evidências capturadas de console no Windows: manter CRLF original.
+docs/verification/*.txt -text
+docs/verification/*.json -text

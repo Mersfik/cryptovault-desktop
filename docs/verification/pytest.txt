@@ -1,0 +1,61 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.13.17, pytest-9.2.0, pluggy-1.7.0
+PySide6 6.9.3 -- Qt runtime 6.9.3 -- Qt compiled 6.9.3
+rootdir: C:\Users\marlo\OneDrive\Documentos\Projeto Padrão
+configfile: pyproject.toml
+testpaths: tests
+plugins: hypothesis-6.170.14, platformdirs-4.14.3, cov-7.1.0, qt-4.5.0
+collected 120 items
+
+tests\test_engine.py .....................s                              [ 18%]
+tests\test_format.py .........................                           [ 39%]
+tests\test_history.py .....                                              [ 43%]
+tests\test_kdf.py ..........                                             [ 51%]
+tests\test_logging.py ......                                             [ 56%]
+tests\test_passwords.py ....                                             [ 60%]
+tests\test_paths.py ...........ss...s                                    [ 74%]
+tests\test_self_test.py ....                                             [ 77%]
+tests\test_service.py ............                                       [ 87%]
+tests\test_settings.py .......                                           [ 93%]
+tests\test_ui.py ........                                                [100%]
+
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.13.17-final-0 _______________
+
+Name                                          Stmts   Miss Branch BrPart  Cover   Missing
+-----------------------------------------------------------------------------------------
+cryptovault\application\service.py              138     23      2      0    84%   115-130, 187-188, 202-217, 262-293, 344, 350
+cryptovault\crypto\engine.py                    163      4     30      4    96%   116, 121, 192, 335
+cryptovault\crypto\format.py                    131     13     52      6    87%   134, 137, 139, 141, 208, 254, 265-271
+cryptovault\crypto\kdf.py                        29      1     10      1    95%   44
+cryptovault\domain\errors.py                     55      1      4      1    97%   91
+cryptovault\domain\models.py                    119      3      2      1    97%   97, 161, 172
+cryptovault\infrastructure\history.py            90      2      6      0    98%   47-48
+cryptovault\infrastructure\logging_setup.py      60      2     10      0    97%   94-99
+cryptovault\infrastructure\settings.py           94      9     10      0    91%   107-108, 111-114, 119-120, 125-126
+cryptovault\security\gate.py                     25      3      4      1    86%   28->exit, 32-33, 36
+cryptovault\security\passwords.py               104     10     42      9    87%   24, 56-57, 89, 104, 106, 108, 113, 115, 117, 161->exit
+cryptovault\security\paths.py                   241     54     62     17    76%   56-58, 67, 73, 77, 83-84, 93, 99, 103, 106-107, 123-124, 126, 156, 176-177, 181, 196-197, 201, 203-205, 241-242, 247, 252, 258, 261, 272-275, 280, 304-319, 331, 335-336
+cryptovault\ui\controller.py                    144     40     34      6    66%   94-96, 107-109, 112-114, 123-125, 149-151, 166->160, 168->160, 174-192, 198-201, 205, 209-211, 220, 223, 226-227
+cryptovault\ui\main_window.py                   425     78     72      8    77%   316, 320->322, 333-338, 341-348, 351-356, 359-362, 369-371, 382-384, 395-397, 410->412, 419->421, 426-427, 442-443, 459, 474-477, 483-484, 492-499, 505-507, 513-515, 522->528, 538->540, 549-551, 564-574, 579-590
+cryptovault\ui\notifications.py                  28     11     10      3    53%   21-23, 28-31, 34-41, 45
+cryptovault\ui\pages\base.py                     28      2      0      0    93%   29, 32
+cryptovault\ui\pages\dashboard.py               147      0     18      1    99%   207->212
+cryptovault\ui\pages\decrypt.py                 189     25     24      8    84%   176, 195-197, 204, 206-207, 209-211, 215-217, 247->exit, 253-257, 259-260, 272-273, 277-278, 281, 284-286
+cryptovault\ui\pages\encrypt.py                 236     45     50     15    76%   160-170, 174, 179-180, 183-185, 187, 196, 200->exit, 205, 212-219, 222, 232-233, 246, 248-249, 251-253, 255-257, 261-263, 265, 300->exit, 307-311, 315->317, 323-328, 334, 337
+cryptovault\ui\pages\history.py                 131      4     18      0    96%   133, 181-191
+cryptovault\ui\pages\settings.py                166     12     16      4    90%   194->exit, 202-203, 207-208, 210-211, 214-216, 219-220, 242
+cryptovault\ui\pages\verify.py                  189     28     24      9    83%   153, 170->exit, 178-182, 188, 190-191, 193-195, 198-200, 229->exit, 235-239, 241-242, 270-274, 278
+cryptovault\ui\utils.py                          31     12     16      4    57%   16, 18, 20, 26-30, 39-42
+cryptovault\ui\widgets.py                       326     49     30      6    80%   42->46, 46->51, 83->88, 146, 153->exit, 156, 233-235, 238-243, 246-247, 250-261, 264-266, 269-273, 291, 328, 331-346, 425-437
+cryptovault\ui\workers.py                        96     64     18      0    28%   66, 69-168, 171-217, 236-247
+-----------------------------------------------------------------------------------------
+TOTAL                                          3477    495    568    104    83%
+
+10 files skipped due to complete coverage.
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_engine.py:228: semântica de permissões POSIX
+SKIPPED [1] tests\test_paths.py:77: criação de link simbólico indisponível
+SKIPPED [1] tests\test_paths.py:89: criação de link simbólico indisponível
+SKIPPED [1] tests\test_paths.py:129: semântica de permissões POSIX
+======================= 116 passed, 4 skipped in 11.20s =======================

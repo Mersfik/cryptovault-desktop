@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "python": "3.13.17",
+  "checks": {
+    "encrypt": true,
+    "verify_authentic": true,
+    "decrypt": true,
+    "tamper_rejected": true,
+    "wrong_password_rejected": true,
+    "no_service_residue": true
+  },
+  "success": true
+}
