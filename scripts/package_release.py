@@ -132,6 +132,11 @@ def _write_windows_zip() -> Path:
     return destination
 
 
+def _setup_installers() -> list[Path]:
+    """Instaladores Inno Setup ja compilados, se existirem."""
+    return sorted(RELEASE.glob(f"CryptoVault-Desktop-{VERSION}-setup*.exe"))
+
+
 def _write_checksums(paths: list[Path]) -> Path:
     destination = RELEASE / "SHA256SUMS.txt"
     lines = []
@@ -146,9 +151,10 @@ def main() -> int:
     source_zip = _write_source_zip()
     windows_zip = _write_windows_zip()
     exe = ROOT / "dist" / "CryptoVault.exe"
-    checksums = _write_checksums([source_zip, windows_zip, exe])
+    installers = _setup_installers()
+    checksums = _write_checksums([source_zip, windows_zip, exe, *installers])
 
-    for path in (source_zip, windows_zip, exe, checksums):
+    for path in (source_zip, windows_zip, exe, *installers, checksums):
         size = path.stat().st_size
         print(f"{path.relative_to(ROOT)}  {size:,} bytes")
 
