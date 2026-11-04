@@ -42,4 +42,5 @@ exe = EXE(
     codesign_identity=None,
     entitlements_file=None,
     icon=str(ICON),
+    version=str(ROOT / "installer" / "version_info.txt"),
 )

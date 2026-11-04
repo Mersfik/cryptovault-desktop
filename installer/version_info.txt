@@ -1,0 +1,46 @@
+# Recurso de versão do Windows para o executável do CryptoVault Desktop.
+# Usado pelo PyInstaller via CryptoVault.spec. O teste
+# tests/test_packaging.py confere se a versão aqui bate com cryptovault.__version__.
+
+VSVersionInfo(
+    ffi=FixedFileInfo(
+        filevers=(1, 0, 0, 0),
+        prodvers=(1, 0, 0, 0),
+        mask=0x3F,
+        flags=0x0,
+        OS=0x40004,
+        fileType=0x1,
+        subtype=0x0,
+        date=(0, 0),
+    ),
+    kids=[
+        StringFileInfo(
+            [
+                StringTable(
+                    "041604E4",
+                    [
+                        StringStruct("CompanyName", "Mersfik"),
+                        StringStruct(
+                            "FileDescription",
+                            "CryptoVault Desktop - criptografia de arquivos",
+                        ),
+                        StringStruct("FileVersion", "1.0.0.0"),
+                        StringStruct("InternalName", "CryptoVault"),
+                        StringStruct(
+                            "LegalCopyright",
+                            "Copyright (c) 2026 Mersfik. Licenca MIT.",
+                        ),
+                        StringStruct("OriginalFilename", "CryptoVault.exe"),
+                        StringStruct("ProductName", "CryptoVault Desktop"),
+                        StringStruct("ProductVersion", "1.0.0"),
+                        StringStruct(
+                            "Comments",
+                            "AES-256-GCM em streaming com derivacao de chave por Scrypt.",
+                        ),
+                    ],
+                )
+            ]
+        ),
+        VarFileInfo([VarStruct("Translation", [1046, 1252])]),
+    ],
+)

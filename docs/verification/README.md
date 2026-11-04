@@ -8,15 +8,17 @@ dos comandos; não são resultados simulados.
 
 | Verificação | Resultado | Arquivo |
 | --- | --- | --- |
-| Suíte de testes | **116 passed, 4 skipped** | [`pytest.txt`](pytest.txt) |
+| Suíte de testes | **121 passed, 4 skipped** | [`pytest.txt`](pytest.txt) |
 | Cobertura de `cryptovault` | **83%** (linhas/ramos) | [`pytest.txt`](pytest.txt) |
 | Ruff (lint) | **All checks passed** | [`ruff-check.txt`](ruff-check.txt) |
-| Ruff (formatação) | **60 files already formatted** | [`ruff-format.txt`](ruff-format.txt) |
+| Ruff (formatação) | **63 files already formatted** | [`ruff-format.txt`](ruff-format.txt) |
 | Bandit | **0 issues** em 5.846 linhas | [`bandit.txt`](bandit.txt) |
 | pip-audit (runtime) | **No known vulnerabilities found** | [`pip-audit.txt`](pip-audit.txt) |
 | pip-audit (desenvolvimento) | **No known vulnerabilities found** | [`pip-audit-dev.txt`](pip-audit-dev.txt) |
 | Self-test do código | **6/6 checks true** | [`self-test-source.json`](self-test-source.json) |
 | Self-test do `.exe` | **6/6 checks true** | [`self-test-exe.json`](self-test-exe.json) |
+| CI (GitHub Actions) | **verde**: 3.12, 3.13 e build Windows | [`ci.md`](ci.md) |
+| Instalador e atalho | **instala, inicia e desinstala** | [`installer.md`](installer.md) |
 
 ## Ambiente
 
@@ -152,9 +154,9 @@ não acessa os dados do usuário.
   formal do formato.
 - `pip-audit` é um instantâneo; novas vulnerabilidades podem surgir depois.
 - O executável não é assinado e o build não é reproduzível de forma atestada.
-- O workflow de CI foi incluído, mas **não foi executado neste ambiente** porque
-  `git`/GitHub não estão disponíveis; os comandos equivalentes foram executados
-  localmente.
+- O CI foi executado no GitHub Actions após a publicação: testes em Python 3.12
+  e 3.13 e build Windows com self-test aprovados. Detalhes e links das
+  execuções estão em [`ci.md`](ci.md).
 - Cobertura mede execução de código, não corretude criptográfica.
 - A UI foi testada com `pytest-qt` e com screenshots reais; não houve teste
   manual prolongado em múltiplos monitores/DPI.

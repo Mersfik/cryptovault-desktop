@@ -111,7 +111,7 @@ verificado. O usuário precisa confiar no canal de distribuição.
 | Inventário de dependências | Implementado | `pyproject.toml`, requirements |
 | Versões mínimas corrigidas | Implementado | `cryptography>=50.0.2`, `pytest>=9.0.3` |
 | Auditoria de vulnerabilidades | Implementado no processo | `pip-audit`, `docs/verification/pip-audit.txt` |
-| CI automatizada | Implementado (workflow incluído; não executado neste ambiente) | `.github/workflows/ci.yml` |
+| CI automatizada | Implementado (GitHub Actions verde em Python 3.12/3.13 e build Windows) | `.github/workflows/ci.yml` |
 | Faixas de versão | Parcial | não há lockfile com hashes; resolução pode variar |
 | Monitoramento contínuo | Parcial | depende de CI/execução manual |
 

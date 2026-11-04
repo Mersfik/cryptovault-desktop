@@ -83,6 +83,54 @@ PySide6 6.9.3, cryptography 50.0.2**.
 
 ## Instalação e execução
 
+### Aplicativo instalado (recomendado)
+
+Baixe o pacote em [Releases](https://github.com/Mersfik/cryptovault-desktop/releases)
+e escolha uma das opções:
+
+**1. Instalador Inno Setup** — `CryptoVault-Desktop-1.0.0-setup.exe`
+
+- Instala em `%LOCALAPPDATA%\Programs\CryptoVault Desktop` (por usuário, sem
+  privilégios administrativos).
+- Cria atalho no Menu Iniciar e oferece o atalho da Área de Trabalho como opção.
+- Registra a desinstalação em **Configurações → Aplicativos**.
+- Preserva `%LOCALAPPDATA%\CryptoVault` na desinstalação.
+
+**2. Instalador por script** — `install.cmd` (ou `install.ps1`), no pacote Windows
+
+Use esta opção se o Smart App Control do Windows bloquear o instalador. Ela
+produz o mesmo resultado (arquivos, atalhos, entrada em Aplicativos e
+desinstalador), sem executar nenhum binário de instalação:
+
+```powershell
+# duplo clique em install.cmd, ou:
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+
+# sem atalho na Área de Trabalho:
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -NoDesktopShortcut
+```
+
+**3. Executável portátil** — `CryptoVault.exe`
+
+Rode diretamente de qualquer pasta, sem instalar. Não cria atalhos. Para ter um
+atalho apontando para o portátil:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\create_shortcut.ps1 `
+  -Target "C:\caminho\CryptoVault.exe" -Location Both
+```
+
+### Desinstalação
+
+- Instalador Inno Setup: **Configurações → Aplicativos → CryptoVault Desktop**.
+- Instalador por script: mesmo caminho em Aplicativos, ou
+  `%LOCALAPPDATA%\Programs\CryptoVault Desktop\uninstall.ps1`
+  (`-RemoveUserData` apaga também histórico e configurações).
+
+Nenhuma das opções remove `%LOCALAPPDATA%\CryptoVault` por padrão.
+
+### Executar a partir do código-fonte
+
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -124,22 +172,41 @@ configurações.
 5. O **Histórico** registra nome do arquivo, operação, horário, resultado,
    tamanho e duração. Ele não é um registro de auditoria inviolável.
 
-## Build do executável Windows
+## Build do executável e do instalador
 
 ```powershell
+# apenas o executável
 powershell -ExecutionPolicy Bypass -File scripts/build_windows.ps1
+
+# executável + instalador Inno Setup
+powershell -ExecutionPolicy Bypass -File scripts/build_installer.ps1
 ```
 
-O script:
+`build_windows.ps1`:
 
 1. gera `cryptovault/resources/logo.ico` e `logo.png`;
-2. executa PyInstaller com `CryptoVault.spec` (one-file, sem console);
+2. executa PyInstaller com `CryptoVault.spec` (one-file, sem console, ícone e
+   metadados de versão do Windows vindos de `installer/version_info.txt`);
 3. roda `dist\CryptoVault.exe --self-test --report dist\self-test.json`;
 4. grava `dist\CryptoVault.exe.sha256`.
 
-Saídas esperadas: `dist\CryptoVault.exe`, `dist\self-test.json` e o checksum.
+`build_installer.ps1` chama o anterior e compila `installer/cryptovault.iss`
+com o Inno Setup 6, gerando `release\CryptoVault-Desktop-1.0.0-setup.exe`.
+O Inno Setup é opcional e pode ser instalado com:
+
+```powershell
+winget install --id JRSoftware.InnoSetup -e
+```
+
+Saídas esperadas: `dist\CryptoVault.exe`, `dist\self-test.json`, o checksum e,
+com o Inno, o instalador em `release\`. Nenhum caminho absoluto do projeto fica
+embutido nos artefatos.
+
 O executável é **não assinado**; em ambientes corporativos, assine-o com o
-certificado da organização antes da distribuição.
+certificado da organização antes da distribuição. Em máquinas com **Smart App
+Control** ativo, instaladores não assinados podem ser bloqueados pelo Windows —
+nesse caso use `install.cmd`, que não depende de nenhum executável de
+instalação.
 
 ## Testes e análise estática
 
@@ -154,7 +221,7 @@ python -m pip_audit -r requirements.txt
 
 Resultados reais da validação desta versão:
 
-- **116 testes passaram, 4 foram ignorados** (semântica POSIX de permissões e
+- **121 testes passaram, 4 foram ignorados** (semântica POSIX de permissões e
   criação de symlink indisponível no Windows).
 - Cobertura de linhas/ramos em `cryptovault`: **83%** (excluindo `app.py` e
   `__main__.py`).

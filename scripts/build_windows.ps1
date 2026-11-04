@@ -15,7 +15,8 @@ python -m PyInstaller --noconfirm --clean CryptoVault.spec
 $Exe = Resolve-Path "dist\CryptoVault.exe"
 $Report = Join-Path $Root "dist\self-test.json"
 Write-Host "[3/4] Executando self-test do executavel..."
-$Process = Start-Process -FilePath $Exe -ArgumentList @("--self-test", "--report", $Report) -Wait -PassThru
+# O caminho do relatorio vai entre aspas: o diretorio do projeto pode ter espacos.
+$Process = Start-Process -FilePath $Exe -ArgumentList @("--self-test", "--report", "`"$Report`"") -Wait -PassThru
 if ($Process.ExitCode -ne 0) {
     throw "Self-test do executavel falhou com codigo $($Process.ExitCode)."
 }

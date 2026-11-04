@@ -377,7 +377,7 @@ adulteração, senha errada e ausência de resíduos.
 
 ## 12. Status de validação
 
-- Implementação exercitada por **116 testes** (4 ignorados no Windows por
+- Implementação exercitada por **121 testes** (4 ignorados no Windows por
   semântica POSIX), com cobertura global de **83%** (excluindo `app.py` e
   `__main__.py`).
 - `ruff`, `bandit` e `pip-audit` sem achados na versão registrada em

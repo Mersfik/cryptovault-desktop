@@ -114,6 +114,9 @@ def _write_windows_zip() -> Path:
         ROOT / "OWASP_MAPPING.md",
         ROOT / "ARCHITECTURE.md",
         ROOT / "CONTRIBUTING.md",
+        ROOT / "installer" / "install.ps1",
+        ROOT / "installer" / "uninstall.ps1",
+        ROOT / "installer" / "install.cmd",
     ]
     missing = [str(path) for path in required if not path.exists()]
     if missing:

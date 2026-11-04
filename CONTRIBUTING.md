@@ -134,7 +134,7 @@ POSIX são ignorados no Windows e devem continuar assim.
 Resultado esperado na versão 1.0.0:
 
 ```text
-116 passed, 4 skipped
+121 passed, 4 skipped
 cobertura total: 83% (excluindo app.py e __main__.py)
 ```
 
@@ -182,6 +182,26 @@ O script:
 Requisitos: `pyinstaller>=6.11,<7`. O binário é one-file, sem console, e não é
 assinado. Se alterar recursos, ícone, versão ou `CryptoVault.spec`, rode o build
 e o self-test antes do PR.
+
+### 9.1 Instalador
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/build_installer.ps1
+```
+
+Gera o executável e compila `installer/cryptovault.iss` com o Inno Setup 6
+(`winget install --id JRSoftware.InnoSetup -e`), produzindo
+`release/CryptoVault-Desktop-<versao>-setup.exe`.
+
+Além do instalador Inno, o projeto mantém `installer/install.ps1` e
+`installer/uninstall.ps1`: instalação por usuário em
+`%LOCALAPPDATA%\Programs\CryptoVault Desktop`, atalhos no Menu Iniciar e na Área
+de Trabalho, entrada em "Aplicativos e recursos" e desinstalação que preserva os
+dados do usuário. Essa via funciona em máquinas com Smart App Control ativo,
+onde instaladores não assinados são bloqueados.
+
+Ao alterar versão, atualize `cryptovault/__init__.py`, `installer/version_info.txt`
+e `installer/cryptovault.iss`; `tests/test_packaging.py` cobre a consistência.
 
 ## 10. Screenshots
 
@@ -242,7 +262,7 @@ python -m pytest -q --cov=cryptovault --cov-report=term-missing
 - [ ] Nenhum segredo/caminho completo em log, histórico ou teste.
 - [ ] Nenhuma saída parcial é publicada em erro/cancelamento.
 - [ ] Testes novos cobrem o comportamento e casos de falha.
-- [ ] `pytest` passa (116+ passed, skips esperados).
+- [ ] `pytest` passa (121+ passed, skips esperados).
 - [ ] `ruff check` e `ruff format --check` passam.
 - [ ] `bandit` sem achados.
 - [ ] `pip-audit` sem vulnerabilidades conhecidas.

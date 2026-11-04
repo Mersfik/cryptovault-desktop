@@ -8,7 +8,7 @@ from pathlib import Path
 from PySide6.QtGui import QColor, QFont, QIcon, QPalette
 from PySide6.QtWidgets import QApplication
 
-RESOURCE_DIR = Path(__file__).resolve().parent / "resources"
+RESOURCE_DIR = Path(__file__).resolve().parents[1] / "resources"
 
 COLORS = {
     "bg": "#0A0F14",

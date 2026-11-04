@@ -1,21 +1,22 @@
-Ôªø============================= test session starts =============================
+============================= test session starts =============================
 platform win32 -- Python 3.13.17, pytest-9.2.0, pluggy-1.7.0
 PySide6 6.9.3 -- Qt runtime 6.9.3 -- Qt compiled 6.9.3
-rootdir: C:\Users\marlo\OneDrive\Documentos\Projeto Padr√£o
+rootdir: C:\Users\marlo\OneDrive\Documentos\Projeto Padr„o
 configfile: pyproject.toml
 testpaths: tests
 plugins: hypothesis-6.170.14, platformdirs-4.14.3, cov-7.1.0, qt-4.5.0
-collected 120 items
+collected 125 items
 
-tests\test_engine.py .....................s                              [ 18%]
-tests\test_format.py .........................                           [ 39%]
-tests\test_history.py .....                                              [ 43%]
-tests\test_kdf.py ..........                                             [ 51%]
-tests\test_logging.py ......                                             [ 56%]
-tests\test_passwords.py ....                                             [ 60%]
-tests\test_paths.py ...........ss...s                                    [ 74%]
-tests\test_self_test.py ....                                             [ 77%]
-tests\test_service.py ............                                       [ 87%]
+tests\test_engine.py .....................s                              [ 17%]
+tests\test_format.py .........................                           [ 37%]
+tests\test_history.py .....                                              [ 41%]
+tests\test_kdf.py ..........                                             [ 49%]
+tests\test_logging.py ......                                             [ 54%]
+tests\test_packaging.py .....                                            [ 58%]
+tests\test_passwords.py ....                                             [ 61%]
+tests\test_paths.py ...........ss...s                                    [ 75%]
+tests\test_self_test.py ....                                             [ 78%]
+tests\test_service.py ............                                       [ 88%]
 tests\test_settings.py .......                                           [ 93%]
 tests\test_ui.py ........                                                [100%]
 
@@ -54,8 +55,8 @@ TOTAL                                          3477    495    568    104    83%
 
 10 files skipped due to complete coverage.
 =========================== short test summary info ===========================
-SKIPPED [1] tests\test_engine.py:228: sem√¢ntica de permiss√µes POSIX
-SKIPPED [1] tests\test_paths.py:77: cria√ß√£o de link simb√≥lico indispon√≠vel
-SKIPPED [1] tests\test_paths.py:89: cria√ß√£o de link simb√≥lico indispon√≠vel
-SKIPPED [1] tests\test_paths.py:129: sem√¢ntica de permiss√µes POSIX
-======================= 116 passed, 4 skipped in 11.20s =======================
+SKIPPED [1] tests\test_engine.py:228: sem‚ntica de permissıes POSIX
+SKIPPED [1] tests\test_paths.py:77: criaÁ„o de link simbÛlico indisponÌvel
+SKIPPED [1] tests\test_paths.py:89: criaÁ„o de link simbÛlico indisponÌvel
+SKIPPED [1] tests\test_paths.py:129: sem‚ntica de permissıes POSIX
+======================= 121 passed, 4 skipped in 11.52s =======================
